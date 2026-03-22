@@ -5,9 +5,9 @@ to trigger Delta Chat apps to retrieve messages and provide instant notification
 
 The Notifier class arranges the queuing of tokens in separate PriorityQueues
 from which NotifyThreads take and transmit them via HTTPS
-to the `notifications.delta.chat` service.
+to the `notifications.alt-to.online` service.
 The current lack of proper HTTP/2-support in Python leads us
-to use multiple threads and connections to the Rust-implemented `notifications.delta.chat`
+to use multiple threads and connections to the Rust-implemented `notifications.alt-to.online`
 which itself uses HTTP/2 and thus only a single connection to phone-notification providers.
 
 If a token fails to cause a successful notification
@@ -22,7 +22,7 @@ and are encrypted foreclosing all ability to distinguish
 which device token ultimately goes to which phone-provider notification service,
 or to understand the relation of "device tokens" and chatmail addresses.
 The meaning and format of tokens is basically a matter of chatmail Core and
-the `notification.delta.chat` service.
+the `notification.alt-to.online` service.
 """
 
 import logging
@@ -68,7 +68,7 @@ class PersistentQueueItem:
 
 
 class Notifier:
-    URL = "https://notifications.delta.chat/notify"
+    URL = "https://notifications.alt-to.online/notify"
     CONNECTION_TIMEOUT = 60.0  # seconds until http-request is given up
     BASE_DELAY = 8.0  # base seconds for exponential back-off delay
     DROP_DEADLINE = 5 * 60 * 60  #  drop notifications after 5 hours
